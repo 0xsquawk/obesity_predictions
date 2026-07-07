@@ -24,7 +24,7 @@ The notebook is split into three parts:
 
 ## First attempt: adding a BMI feature (and why it was a mistake)
 
-We calculated BMI from weight and height and dropped weight and height so the model wouldn't have redundant info. Gradient Boosting came out on top with 98% accuracy, which sounds great, but when we checked feature importance, BMI alone was responsible for about 90% of the model's decisions. That's a problem: BMI is just weight and height combined, and those are basically how obesity is defined in this dataset. So the model wasn't really learning from eating habits or lifestyle, it was just doing the obesity math backwards. This is a classic case of target leakage.
+BMI was calculated from weight and height and then dropped weight and height so the model wouldn't have redundant info. Gradient Boosting came out on top with 98% accuracy, which sounds great, but when we checked feature importance, BMI alone was responsible for about 90% of the model's decisions. That's a problem: BMI is just weight and height combined, and those are basically how obesity is defined in this dataset. So the model wasn't really learning from eating habits or lifestyle, it was just doing the obesity math backwards. This is a classic case of target leakage.
 
 ## Second attempt: dropping BMI and using real lifestyle features
 
@@ -84,7 +84,7 @@ Random Forest was tuned further and landed on no max depth limit, a minimum spli
 Install what you need:
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn ucimlrepo itables
+pip install -r requirements.txt
 ```
 
 Then open `py_obesity_analysis.ipynb` in Jupyter and run the cells in order. The dataset pulls straight from UCI, so there's nothing extra to download.
