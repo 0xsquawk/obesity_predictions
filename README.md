@@ -47,6 +47,30 @@ This whole comparison was run twice:
 
 Whichever model won each round was then tuned further using grid search, which itself uses 5-fold cross-validation to try out different parameter combinations and find the best one. After tuning, the winning model was tested exactly once on the untouched test set, just to confirm it actually holds up outside of cross-validation.
 
+## Final results
+
+**Cross-validation scores, round 1 (with BMI):**
+
+| Model | Mean Accuracy |
+|---|---|
+| Logistic Regression | 0.88 |
+| Random Forest | 0.97 |
+| Support Vector Machine | 0.91 |
+| Gradient Boosting | 0.98 |
+
+Gradient Boosting was tuned further and landed on a learning rate of 0.05, max depth of 3, and 200 estimators, giving 0.976 cross-validation accuracy. On the untouched test set it hit 98% accuracy overall, with precision and recall both sitting at 0.97-1.00 across every obesity category. As covered above, this result isn't trustworthy on its own since BMI was doing most of the work.
+
+**Cross-validation scores, round 2 (without BMI):**
+
+| Model | Mean Accuracy |
+|---|---|
+| Logistic Regression | 0.61 |
+| Random Forest | 0.85 |
+| Support Vector Machine | 0.77 |
+| Gradient Boosting | 0.81 |
+
+Random Forest was tuned further and landed on no max depth limit, a minimum split of 2, and 300 estimators, giving 0.8625 cross-validation accuracy. On the test set it reached 83% overall accuracy. It did well on the more extreme categories (Obesity Type III scored a perfect 1.00 across precision, recall, and f1), but struggled more in the middle of the spectrum, Normal Weight in particular came in at only 0.56 precision, meaning the model over-predicts that class more than it should. This is the more trustworthy result of the two, since it's built entirely from real lifestyle and demographic features rather than a derived shortcut.
+
 ## Tools used
 
 - **Language:** Python
